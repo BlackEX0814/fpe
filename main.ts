@@ -196,8 +196,10 @@ mySprite.ay = 300
 info.setLife(3)
 scene.setBackgroundImage(assets.image`我的影像0`)
 myEnemy = sprites.create(assets.image`kaijuMomLarge4`, SpriteKind.Enemy)
+let 我的敵人2 = sprites.create(assets.image`kaijuMomLarge11`, SpriteKind.Enemy)
+myEnemy.follow(mySprite, 0)
 mySprite.setPosition(150, 87)
-myEnemy.follow(mySprite, 35)
+我的敵人2.follow(mySprite, 35)
 game.onUpdate(function () {
     if (mySprite.bottom > 100) {
         mySprite.bottom = 100
@@ -212,4 +214,14 @@ forever(function () {
     pause(300)
     myEnemy.setImage(assets.image`kaijuMomLarge7`)
     pause(300)
+})
+forever(function () {
+    我的敵人2.setImage(assets.image`kaijuMomLarge15`)
+    pause(200)
+    我的敵人2.setImage(assets.image`kaijuMomLarge16`)
+    pause(200)
+    我的敵人2.setImage(assets.image`kaijuMomLarge17`)
+    pause(200)
+    我的敵人2.setImage(assets.image`kaijuMomLarge16`)
+    pause(200)
 })
