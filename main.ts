@@ -1,3 +1,7 @@
+namespace SpriteKind {
+    export const 敵人2 = SpriteKind.create()
+    export const 敵人3 = SpriteKind.create()
+}
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.overlapsWith(考卷)) {
         scene.setBackgroundImage(img`
@@ -137,9 +141,10 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSp
     animation.runImageAnimation(
     myEnemy,
     assets.animation`我的動畫`,
-    50,
+    80,
     false
     )
+    pause(500)
     sprites.destroy(mySprite, effects.disintegrate, 500)
     pause(1000)
     game.gameOver(false)
@@ -158,8 +163,32 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     mySprite.setImage(assets.image`kaijuMomLarge1`)
 })
+sprites.onOverlap(SpriteKind.敵人2, SpriteKind.Player, function (sprite, otherSprite) {
+    animation.runImageAnimation(
+    我的敵人2,
+    assets.animation`我的動畫0`,
+    100,
+    false
+    )
+    pause(200)
+    sprites.destroy(mySprite, effects.disintegrate, 500)
+    pause(1000)
+    game.gameOver(false)
+})
 controller.right.onEvent(ControllerButtonEvent.Released, function () {
     mySprite.setImage(assets.image`kaijuMomLarge1`)
+})
+sprites.onOverlap(SpriteKind.敵人3, SpriteKind.Player, function (sprite, otherSprite) {
+    animation.runImageAnimation(
+    我的敵人3,
+    assets.animation`我的動畫1`,
+    100,
+    false
+    )
+    pause(200)
+    sprites.destroy(mySprite, effects.disintegrate, 500)
+    pause(1000)
+    game.gameOver(false)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`transparency16`, function (sprite, location) {
     考卷 = sprites.create(img`
@@ -189,17 +218,20 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 let 考卷: Sprite = null
+let 我的敵人3: Sprite = null
+let 我的敵人2: Sprite = null
 let myEnemy: Sprite = null
 let mySprite: Sprite = null
 mySprite = sprites.create(assets.image`kaijuMomLarge1`, SpriteKind.Player)
 mySprite.ay = 300
-info.setLife(3)
 scene.setBackgroundImage(assets.image`我的影像0`)
 myEnemy = sprites.create(assets.image`kaijuMomLarge4`, SpriteKind.Enemy)
-let 我的敵人2 = sprites.create(assets.image`kaijuMomLarge11`, SpriteKind.Enemy)
-myEnemy.follow(mySprite, 0)
+我的敵人2 = sprites.create(assets.image`kaijuMomLarge11`, SpriteKind.敵人2)
+我的敵人3 = sprites.create(assets.image`kaijuMomLarge4`, SpriteKind.敵人3)
+myEnemy.follow(mySprite, 30)
 mySprite.setPosition(150, 87)
 我的敵人2.follow(mySprite, 35)
+我的敵人3.follow(mySprite, 30)
 game.onUpdate(function () {
     if (mySprite.bottom > 100) {
         mySprite.bottom = 100
@@ -224,4 +256,14 @@ forever(function () {
     pause(200)
     我的敵人2.setImage(assets.image`kaijuMomLarge16`)
     pause(200)
+})
+forever(function () {
+    我的敵人3.setImage(assets.image`kaijuMomLarge20`)
+    pause(350)
+    我的敵人3.setImage(assets.image`kaijuMomLarge21`)
+    pause(350)
+    我的敵人3.setImage(assets.image`kaijuMomLarge22`)
+    pause(350)
+    我的敵人3.setImage(assets.image`kaijuMomLarge21`)
+    pause(350)
 })
